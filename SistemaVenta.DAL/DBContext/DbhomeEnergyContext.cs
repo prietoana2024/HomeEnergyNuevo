@@ -24,6 +24,10 @@ public partial class DbhomeEnergyContext : DbContext
 
     public virtual DbSet<ClienteUsuario> ClienteUsuarios { get; set; }
 
+    public virtual DbSet<Cotizacion> Cotizacions { get; set; }
+
+    public virtual DbSet<CotizacionServicio> CotizacionServicios { get; set; }
+
     public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
 
     public virtual DbSet<Estado> Estados { get; set; }
@@ -140,6 +144,120 @@ public partial class DbhomeEnergyContext : DbContext
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.ClienteUsuarios)
                 .HasForeignKey(d => d.IdUsuario)
                 .HasConstraintName("FK__ClienteUs__idUsu__4E88ABD4");
+        });
+
+        modelBuilder.Entity<Cotizacion>(entity =>
+        {
+            entity.HasKey(e => e.IdCotizacion).HasName("PK__Cotizaci__D931C39BBCFD2195");
+
+            entity.ToTable("Cotizacion");
+
+            entity.Property(e => e.IdCotizacion).HasColumnName("idCotizacion");
+            entity.Property(e => e.Ahorra)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("ahorra");
+            entity.Property(e => e.Contrato)
+                .HasMaxLength(2500)
+                .IsUnicode(false)
+                .HasColumnName("contrato");
+            entity.Property(e => e.CuotaMensual)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("cuotaMensual");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.FechaRegistro)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("fechaRegistro");
+            entity.Property(e => e.IdProspecto).HasColumnName("idProspecto");
+            entity.Property(e => e.Identificacion).HasColumnName("identificacion");
+            entity.Property(e => e.MensualAprox)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("mensualAprox");
+            entity.Property(e => e.Notas)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("notas");
+            entity.Property(e => e.PagoElectricidad)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("pagoElectricidad");
+            entity.Property(e => e.PagoInicial)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("pagoInicial");
+            entity.Property(e => e.Pdf)
+                .HasMaxLength(2000)
+                .IsUnicode(false)
+                .HasColumnName("pdf");
+            entity.Property(e => e.PorcentajeIncremento).HasColumnName("porcentajeIncremento");
+            entity.Property(e => e.ProyeccionSolar)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("proyeccionSolar");
+            entity.Property(e => e.Pulgadas2).HasColumnName("pulgadas2");
+            entity.Property(e => e.SocEin).HasColumnName("socEin");
+            entity.Property(e => e.TamanoSistema)
+                .HasMaxLength(15)
+                .IsUnicode(false)
+                .HasColumnName("tamanoSistema");
+            entity.Property(e => e.TiempoFinancing).HasColumnName("tiempoFinancing");
+            entity.Property(e => e.TiempoSolar).HasColumnName("tiempoSolar");
+            entity.Property(e => e.TipoIdentificacion)
+                .HasMaxLength(2)
+                .IsUnicode(false)
+                .HasColumnName("tipoIdentificacion");
+            entity.Property(e => e.TipoPago)
+                .HasMaxLength(40)
+                .IsUnicode(false)
+                .HasColumnName("tipoPago");
+            entity.Property(e => e.Total)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("total");
+            entity.Property(e => e.Url1)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("url1");
+            entity.Property(e => e.Url2)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("url2");
+            entity.Property(e => e.Url3)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("url3");
+            entity.Property(e => e.Url4)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("url4");
+            entity.Property(e => e.ValorIntereses)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("valorIntereses");
+            entity.Property(e => e.ValorPagado)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("valorPagado");
+
+            entity.HasOne(d => d.IdProspectoNavigation).WithMany(p => p.Cotizacions)
+                .HasForeignKey(d => d.IdProspecto)
+                .HasConstraintName("FK__Cotizacio__idPro__30C33EC3");
+        });
+
+        modelBuilder.Entity<CotizacionServicio>(entity =>
+        {
+            entity.HasKey(e => e.IdCotizacionServicio).HasName("PK__Cotizaci__98E196126C335AD4");
+
+            entity.ToTable("CotizacionServicio");
+
+            entity.Property(e => e.IdCotizacionServicio).HasColumnName("idCotizacionServicio");
+            entity.Property(e => e.IdCotizacion).HasColumnName("idCotizacion");
+            entity.Property(e => e.IdServicio).HasColumnName("idServicio");
+
+            entity.HasOne(d => d.IdCotizacionNavigation).WithMany(p => p.CotizacionServicios)
+                .HasForeignKey(d => d.IdCotizacion)
+                .HasConstraintName("FK__Cotizacio__idCot__3493CFA7");
+
+            entity.HasOne(d => d.IdServicioNavigation).WithMany(p => p.CotizacionServicios)
+                .HasForeignKey(d => d.IdServicio)
+                .HasConstraintName("FK__Cotizacio__idSer__3587F3E0");
         });
 
         modelBuilder.Entity<DetalleVenta>(entity =>

@@ -46,6 +46,7 @@ namespace SistemaVenta.IOC
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IFile2Service, File2Service>();
+            services.AddScoped<ICotizacionService, CotizacionService>();
             services.AddScoped<DbContext, DbhomeEnergyContext>();
 
         }

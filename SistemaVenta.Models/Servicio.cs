@@ -20,4 +20,6 @@ public partial class Servicio
     public virtual ICollection<DetalleVenta> DetalleVenta { get; } = new List<DetalleVenta>();
 
     public virtual Categoria? IdCategoriaNavigation { get; set; }
+
+    public virtual ICollection<CotizacionServicio> CotizacionServicios { get; } = new List<CotizacionServicio>();
 }

@@ -198,6 +198,72 @@ namespace SistemaVenta.Utility
                 opt => opt.MapFrom(origen => origen.ContentType)
                 );
             #endregion FileRecord
+
+            #region Cotizacion
+            CreateMap<Cotizacion, CotizacionDTO>()
+                 .ForMember(destino => destino.DescripcionProspecto,
+                opt => opt.MapFrom(origen => origen.IdProspectoNavigation)
+                )
+                .ForMember(destino => destino.TotalTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total.Value, new CultureInfo("es-CO")))
+                )
+                .ForMember(destino => destino.AhorraTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Ahorra.Value, new CultureInfo("es-CO")))
+                )
+                .ForMember(destino => destino.ValorInteresesTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ValorIntereses.Value, new CultureInfo("es-CO")))
+                )
+                 .ForMember(destino => destino.CuotaMensualTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.CuotaMensual.Value, new CultureInfo("es-CO")))
+                )
+                 .ForMember(destino => destino.PagoElectricidadTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.PagoElectricidad.Value, new CultureInfo("es-CO")))
+                )
+                 .ForMember(destino => destino.MensualAproxTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.MensualAprox.Value, new CultureInfo("es-CO")))
+                )
+                  .ForMember(destino => destino.ValorPagadoTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ValorPagado.Value, new CultureInfo("es-CO")))
+                )
+                  .ForMember(destino => destino.ProyeccionSolarTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ProyeccionSolar.Value, new CultureInfo("es-CO")))
+                )
+                  .ForMember(destino => destino.PagoInicialTexto,
+                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.PagoInicial.Value, new CultureInfo("es-CO")))
+                )
+                .ForMember(destino =>
+                destino.FechaRegistro,
+                opt => opt.MapFrom(origen => origen.FechaRegistro.Value.ToString("dd/MM/yyyy"))
+                );
+
+            CreateMap<CotizacionDTO, Cotizacion>()
+
+           .ForMember(destino => destino.IdProspectoNavigation,
+           opt => opt.Ignore()
+           )
+           .ForMember(destino => destino.Total,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.TotalTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.Ahorra,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.AhorraTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.ValorIntereses,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ValorInteresesTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.CuotaMensual,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.CuotaMensualTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.PagoElectricidad,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.PagoElectricidadTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.MensualAprox,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.MensualAproxTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.ValorPagado,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ValorPagadoTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.ProyeccionSolar,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ProyeccionSolarTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.PagoInicial,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.PagoInicialTexto, new CultureInfo("es-CO"))))
+           .ForMember(destino => destino.FechaRegistro,
+           opt => opt.MapFrom(origen => Convert.ToDateTime(origen.FechaRegistro)));
+
+            #endregion Cotizacion
+
         }
 
     }
