@@ -67,5 +67,8 @@ namespace SistemaVenta.DTO
         public string? Pdf { get; set; }
 
         public string? FechaRegistro { get; set; }
+
+        public virtual ICollection<ServicioDTO> Servicios { get; set; }
+
     }
 }

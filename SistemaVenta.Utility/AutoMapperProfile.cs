@@ -234,13 +234,19 @@ namespace SistemaVenta.Utility
                 .ForMember(destino =>
                 destino.FechaRegistro,
                 opt => opt.MapFrom(origen => origen.FechaRegistro.Value.ToString("dd/MM/yyyy"))
-                );
+                )
+            .ForMember(destino => destino.Servicios,
+             opt => opt.MapFrom(origen => origen.CotizacionServicios));
+
+
 
             CreateMap<CotizacionDTO, Cotizacion>()
-
-           .ForMember(destino => destino.IdProspectoNavigation,
+            .ForMember(destino => destino.IdProspectoNavigation,
            opt => opt.Ignore()
            )
+           .ForMember(destino=>destino.CotizacionServicios,
+             opt => opt.MapFrom(origen =>origen.Servicios))
+
            .ForMember(destino => destino.Total,
            opt => opt.MapFrom(origen => Convert.ToDecimal(origen.TotalTexto, new CultureInfo("es-CO"))))
            .ForMember(destino => destino.Ahorra,
@@ -263,6 +269,26 @@ namespace SistemaVenta.Utility
            opt => opt.MapFrom(origen => Convert.ToDateTime(origen.FechaRegistro)));
 
             #endregion Cotizacion
+
+            CreateMap<CotizacionServicio, CotizacionDTO>()
+                .ForMember(destino =>
+                destino.IdCotizacion,
+                opt => opt.MapFrom(origen => origen.IdCotizacionNavigation));
+
+            CreateMap< CotizacionDTO, CotizacionServicio>()
+                .ForMember(destino =>
+                destino.IdCotizacionNavigation,
+                opt => opt.MapFrom(origen => origen.IdCotizacion));
+
+            CreateMap<CotizacionServicio, ServicioDTO>()
+                .ForMember(destino =>
+                destino.IdServicio,
+                opt => opt.MapFrom(origen => origen.IdServicioNavigation));
+
+            CreateMap<ServicioDTO, CotizacionServicio>()
+                .ForMember(destino =>
+                destino.IdServicioNavigation,
+                opt => opt.MapFrom(origen => origen.IdServicio));
 
         }
 
