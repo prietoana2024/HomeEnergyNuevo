@@ -35,5 +35,23 @@ namespace SistemaVenta.API.Controllers
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
         }
+        [HttpGet]
+        [Route("MiResumen")]
+        public async Task<IActionResult> MiResumen(int id)
+        {
+            var rsp = new Response<DashBoardDTO>();
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _dashboardServicio.MiResumen(id);
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = false;
+                rsp.Msg = ex.Message;
+            }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
+            return Ok(rsp);
+        }
     }
 }

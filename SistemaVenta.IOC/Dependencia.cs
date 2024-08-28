@@ -29,6 +29,8 @@ namespace SistemaVenta.IOC
             //ahora utilizamos un modelo en especifico
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IVentaRepository, VentaRepository>();
+            services.AddScoped<ICotizacionRepository, CotizacionRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -42,11 +44,13 @@ namespace SistemaVenta.IOC
             services.AddScoped<IDashBoardService, DashBoardService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IClientesService2, ClientesService2>();
             services.AddScoped<IProspectoService, ProspectoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IFile2Service, File2Service>();
             services.AddScoped<ICotizacionService, CotizacionService>();
+            services.AddScoped<IDetalleVentaService, DetalleVentaService>();
             services.AddScoped<DbContext, DbhomeEnergyContext>();
 
         }

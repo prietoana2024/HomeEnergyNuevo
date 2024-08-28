@@ -52,6 +52,7 @@ namespace SistemaVenta.DLL.Servicios
         public async Task<List<VentaDTO>> Historial(string buscarPor, string numeroVenta, string fechaInicio, string fechaFin)
         {
             IQueryable<Venta> query = await _ventaRepositorio.Consultar();
+            IQueryable<DetalleVenta> queryDetalle = await _detalleVentaRepositorio.Consultar();
             var listaResultado = new List<Venta>();
 
             try
@@ -65,12 +66,18 @@ namespace SistemaVenta.DLL.Servicios
                    v.FechaRegistro.Value.Date >= fech_Inicio.Date &&
                    v.FechaRegistro.Value.Date <= fech_Fin.Date).Include(dv => dv.DetalleVenta)
                    .ThenInclude(p => p.IdServicioNavigation).ToListAsync();
+
+                    
                 }
-                else
+                else if(buscarPor == "numero")
                 {
                     listaResultado = await query.Where(v =>
                    v.NumeroDocumento == numeroVenta).Include(dv => dv.DetalleVenta)
                    .ThenInclude(p => p.IdServicioNavigation).ToListAsync();
+                }
+                else
+                {
+
                 }
             }
             catch
@@ -93,7 +100,7 @@ namespace SistemaVenta.DLL.Servicios
                 DateTime fech_Fin = DateTime.ParseExact(fechaFin, "dd/MM/yyyy", new CultureInfo("es-CO"));
 
                 listaResultado = await query.Include(p => p.IdServicioNavigation).Include(v => v.IdVentaNavigation)
-                    .Where(dv => dv.IdVentaNavigation.FechaRegistro.Value.Date >= fech_Inicio.Date &&
+                    .Where(dv => dv.IdVentaNavigation!.FechaRegistro!.Value.Date >= fech_Inicio.Date &&
                     dv.IdVentaNavigation.FechaRegistro.Value.Date <= fech_Fin.Date).ToListAsync();
             }
             catch

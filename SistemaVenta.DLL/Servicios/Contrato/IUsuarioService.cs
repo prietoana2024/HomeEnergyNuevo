@@ -14,5 +14,9 @@ namespace SistemaVenta.DLL.Servicios.Contrato
         Task<UsuarioDTO> Crear(UsuarioDTO modelo);
         Task<bool> Editar(UsuarioDTO modelo);
         Task<bool> Eliminar(int id);
+
+        Task<bool> EditarActivo(int id);
+
+        Task<bool> EditarNoActivo(int id);
     }
 }

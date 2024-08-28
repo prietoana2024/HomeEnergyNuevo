@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SistemaVenta.Models;
 
-public partial class Cliente
+public  class Cliente
 {
     public int? IdCliente { get; set; }
 

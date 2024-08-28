@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using SistemaVenta.DAL.Repositorios;
 using SistemaVenta.DAL.Repositorios.Contrato;
 using SistemaVenta.DLL.Servicios.Contrato;
 using SistemaVenta.DTO;
@@ -16,19 +17,19 @@ namespace SistemaVenta.DLL.Servicios
 {
     public class ClienteService:IClienteService
     {
-        private readonly IGenericRepository<ClienteUsuario> _clienteUsuarioRepositorio;
         private readonly IGenericRepository<Cliente> _clienteRepositorio;
         private readonly IGenericRepository<Usuario> _usuarioRepositorio;
         private readonly IGenericRepository<Prospecto> _prospectoRepositorio;
         private readonly IMapper _mapper;
+        private readonly IGenericRepository<ClienteUsuario> _clienteUsuarioRepositorio;
 
-        public ClienteService(IGenericRepository<ClienteUsuario> clienteUsuarioRepositorio, IGenericRepository<Cliente> clienteRepositorio, IGenericRepository<Usuario> usuarioRepositorio, IGenericRepository<Prospecto> prospectoRepositorio, IMapper mapper)
+        public ClienteService(IGenericRepository<Cliente> clienteRepositorio, IGenericRepository<Usuario> usuarioRepositorio, IGenericRepository<Prospecto> prospectoRepositorio, IMapper mapper, IGenericRepository<ClienteUsuario> clienteUsuarioRepositorio)
         {
-            _clienteUsuarioRepositorio = clienteUsuarioRepositorio;
             _clienteRepositorio = clienteRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
             _prospectoRepositorio = prospectoRepositorio;
             _mapper = mapper;
+            _clienteUsuarioRepositorio = clienteUsuarioRepositorio;
         }
 
         public async Task<List<ClienteDTO>> Lista()
@@ -45,6 +46,7 @@ namespace SistemaVenta.DLL.Servicios
                 throw;
             }
         }
+
         public async Task<ClienteDTO> Crear(ClienteDTO modelo)
         {
             try

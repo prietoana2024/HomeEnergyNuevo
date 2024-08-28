@@ -24,17 +24,16 @@ namespace SistemaVenta.DTO
 
         public int? Idauditor { get; set; }
 
-        public string? DescripcionAuditor { get; set; }
         public string? Detalle { get; set; }
 
         public int? EsActivo { get; set; }
 
-        public DateTime? Fecha { get; set; }
+        public string? Fecha { get; set; }
 
         public int? IdProspecto { get; set; }
 
-        public string? DescripcionProspecto { get; set; }
+        public string? FechaRegistro { get; set; }
 
-        public DateTime? FechaRegistro { get; set; }
+        public virtual ICollection<UsuarioDTO> Usuarios { get; set; }
     }
 }

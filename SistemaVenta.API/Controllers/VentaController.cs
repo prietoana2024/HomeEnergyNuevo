@@ -41,17 +41,17 @@ namespace SistemaVenta.API.Controllers
         [Route("Historial")]
         //[Route("Historial/{buscarpor:string}/{numerocotizacion:string}/{fechaInicio:string}/{fechaFin:string}/")]
 
-        public async Task<IActionResult> Historial(string? buscarpor, string? numerocotizacion, string? fechaInicio, string? fechaFin)
+        public async Task<IActionResult> Historial(string? buscarpor, string? numeroVenta, string? fechaInicio, string? fechaFin)
         {
             var rsp = new Response<List<VentaDTO>>();
-            numerocotizacion = numerocotizacion is null ? "" : numerocotizacion;
+            numeroVenta = numeroVenta is null ? "" : numeroVenta;
             fechaInicio = fechaInicio is null ? "" : fechaInicio;
             fechaFin = fechaFin is null ? "" : fechaFin;
             buscarpor = buscarpor is null ? "" : buscarpor;
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _ventaServicio.Historial(buscarpor, numerocotizacion, fechaInicio, fechaFin);
+                rsp.Value = await _ventaServicio.Historial(buscarpor, numeroVenta, fechaInicio, fechaFin);
             }
             catch (Exception ex)
             {

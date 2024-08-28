@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaVenta.DLL.Servicios.Contrato;
 using SistemaVenta.API.Utilidad;
-using SistemaVenta.DLL.Servicios.Contrato;
 using SistemaVenta.DTO;
+using SistemaVenta.Models;
 
 namespace SistemaVenta.API.Controllers
 {
@@ -58,6 +58,7 @@ namespace SistemaVenta.API.Controllers
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
         }
+       
         [HttpPost]
         [Route("Guardar")]
 
@@ -118,6 +119,26 @@ namespace SistemaVenta.API.Controllers
             }
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
-        }
+        }/*
+        [HttpPost]
+        [Route("AgregarCliente")]
+        public async Task<IActionResult> Agregar([FromForm] ClienteDTO cliente)
+        {
+
+            var rsp = new Response<ClienteDTO>();
+
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _clientes2Servicio.Registrar(cliente);
+            }
+
+            catch (Exception ex)
+            {
+                rsp.Status = false;
+                rsp.Msg = ex.Message;
+            }
+            return Ok(rsp);
+        }*/
     }
 }

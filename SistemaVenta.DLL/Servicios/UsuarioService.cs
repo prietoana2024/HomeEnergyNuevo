@@ -128,7 +128,6 @@ namespace SistemaVenta.DLL.Servicios
                 {
                     throw new TaskCanceledException("El usuario no existe");
                 }
-
                 bool respuesta = await _usuarioRepositorio.Eliminar(usuarioEncontrado);
 
                 if (respuesta == false)
@@ -145,6 +144,68 @@ namespace SistemaVenta.DLL.Servicios
             }
         }
 
-        
+        public async Task<bool> EditarActivo(int id)
+        {
+            try
+            {
+                var usuarioEncontrado = await _usuarioRepositorio.Obtener(u => u.IdUsuario == id);
+                //donde usuario encontrado en la segunda parte no lleva await 
+
+                if (usuarioEncontrado == null)
+                {
+                    throw new TaskCanceledException("El usuario no existe");
+                }
+                usuarioEncontrado.EsActivo = true;
+
+                bool respuesta = await _usuarioRepositorio.Editar(usuarioEncontrado);
+
+                
+
+                if (respuesta == false)
+                {
+                    throw new TaskCanceledException("No se pudo eliminar");
+
+                }
+                return respuesta;
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> EditarNoActivo(int id)
+        {
+            try
+            {
+                var usuarioEncontrado = await _usuarioRepositorio.Obtener(u => u.IdUsuario == id);
+                //donde usuario encontrado en la segunda parte no lleva await 
+
+                if (usuarioEncontrado == null)
+                {
+                    throw new TaskCanceledException("El usuario no existe");
+                }
+                usuarioEncontrado.EsActivo = false;
+
+                bool respuesta = await _usuarioRepositorio.Editar(usuarioEncontrado);
+
+
+
+                if (respuesta == false)
+                {
+                    throw new TaskCanceledException("No se pudo eliminar");
+
+                }
+                return respuesta;
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
     }
 }

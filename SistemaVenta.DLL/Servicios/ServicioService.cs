@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using SistemaVenta.DLL.Servicios.Contrato;
 using SistemaVenta.DTO;
-using SistemaVenta.DAL.Repositorios.Contrato;
 using SistemaVenta.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SistemaVenta.DAL.DBContext;
-using SistemaVenta.DAL.Repositorios.Contrato;
-using SistemaVenta.Models;
 using System.Threading.Tasks;
 
 namespace SistemaVenta.DAL.Repositorios
@@ -48,6 +45,7 @@ namespace SistemaVenta.DAL.Repositorios
                     string numeroVenta = ceros + correlativo.UltimoNumero.ToString();
                     numeroVenta = numeroVenta.Substring(numeroVenta.Length - CantidadDigitos, CantidadDigitos);
                     modelo.NumeroDocumento = numeroVenta;
+                    modelo.FechaRegistro = DateTime.Now;
 
                     await _dbContext.AddAsync(modelo);
                     await _dbContext.SaveChangesAsync();

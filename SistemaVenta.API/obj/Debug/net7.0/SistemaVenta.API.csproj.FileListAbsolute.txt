@@ -168,6 +168,12 @@ C:\Users\priet\source\repos\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta
 C:\Users\priet\source\repos\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.pdb
 C:\Users\priet\source\repos\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.genruntimeconfig.cache
 C:\Users\priet\source\repos\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\ref\SistemaVenta.API.dll
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.csproj.AssemblyReference.cache
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.AssemblyInfoInputs.cache
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.AssemblyInfo.cs
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.csproj.CoreCompileInputs.cache
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\appsettings.json
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\SistemaVenta.API.exe
@@ -179,6 +185,8 @@ C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\Siste
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Azure.Core.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\MailKit.dll
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
@@ -197,6 +205,8 @@ C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\Siste
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\MimeKit.dll
+C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\BouncyCastle.Crypto.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -232,13 +242,6 @@ C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\Siste
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\SistemaVenta.DAL.pdb
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\SistemaVenta.Models.pdb
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\SistemaVenta.Utility.pdb
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.csproj.AssemblyReference.cache
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.AssemblyInfoInputs.cache
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.AssemblyInfo.cs
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.csproj.CoreCompileInputs.cache
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\staticwebassets\msbuild.SistemaVenta.API.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\staticwebassets\msbuild.build.SistemaVenta.API.props
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.SistemaVenta.API.props
@@ -253,7 +256,3 @@ C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\Siste
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.pdb
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\SistemaVenta.API.genruntimeconfig.cache
 C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\obj\Debug\net7.0\ref\SistemaVenta.API.dll
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\MailKit.dll
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\MimeKit.dll
-C:\Users\priet\OneDrive\Escritorio\AppSistemaHomeEnergy\SolucionHomeEnergy\SistemaVenta.API\bin\Debug\net7.0\BouncyCastle.Crypto.dll

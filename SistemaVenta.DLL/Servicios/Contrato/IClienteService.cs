@@ -15,5 +15,6 @@ namespace SistemaVenta.DLL.Servicios.Contrato
         Task<bool> Eliminar(int id);
         Task<List<UsuarioDTO>> ListaCliente(int idUsuario);
 
+
     }
 }

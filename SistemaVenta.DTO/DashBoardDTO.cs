@@ -14,6 +14,14 @@ namespace SistemaVenta.DTO
 
         public int? TotalServicios { get; set; }
         public int? TotalCerradas { get; set; }
+
+        public int? TotalCotizaciones { get; set; }
+
+        public int? TotalProspectos { get; set; }
+
         public List<VentasSemanaDTO> VentasUltimaSemana { get; set; }
+
+        public List<ClientesSemanaDTO> ClientesUltimaSemana { get; set; }
+
     }
 }

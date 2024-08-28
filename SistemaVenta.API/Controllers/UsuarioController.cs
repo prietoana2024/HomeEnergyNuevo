@@ -83,12 +83,52 @@ namespace SistemaVenta.API.Controllers
         [Route("Editar")]
         public async Task<IActionResult> Editar([FromBody] UsuarioDTO usuario)
         {
-            var rsp = new Response<UsuarioDTO>();
+            var rsp = new Response<bool>();
 
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _usuarioServicio.Crear(usuario);
+                rsp.Value = await _usuarioServicio.Editar(usuario);
+            }
+
+            catch (Exception ex)
+            {
+                rsp.Status = false;
+                rsp.Msg = ex.Message;
+            }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
+            return Ok(rsp);
+        }
+        [HttpDelete]
+        [Route("EditarActivo/{id:int}")]
+        public async Task<IActionResult> EditarActivo(int id)
+        {
+            var rsp = new Response<bool>();
+
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _usuarioServicio.EditarActivo(id);
+            }
+
+            catch (Exception ex)
+            {
+                rsp.Status = false;
+                rsp.Msg = ex.Message;
+            }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
+            return Ok(rsp);
+        }
+        [HttpDelete]
+        [Route("EditarNoActivo/{id:int}")]
+        public async Task<IActionResult> EditarNoActivo(int id)
+        {
+            var rsp = new Response<bool>();
+
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _usuarioServicio.EditarNoActivo(id);
             }
 
             catch (Exception ex)

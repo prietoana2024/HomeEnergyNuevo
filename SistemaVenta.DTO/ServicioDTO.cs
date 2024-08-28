@@ -17,7 +17,7 @@ namespace SistemaVenta.DTO
 
         public string? DescripcionCategoria { get; set; }
 
-        public decimal? Precio { get; set; }
+        public string? Precio { get; set; }
 
         public int? EsActivo { get; set; }
     }
