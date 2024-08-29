@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SistemaVenta.DLL.Servicios.Contrato;
-using SistemaVenta.API.Utilidad;
 using SistemaVenta.DTO;
 using SistemaVenta.Models;
+using SistemaVenta.API.Utilidad;
+using AutoMapper;
 
 namespace SistemaVenta.API.Controllers
 {
@@ -17,59 +18,15 @@ namespace SistemaVenta.API.Controllers
         {
             _clienteServicio = clienteServicio;
         }
-
-        [HttpGet]
-        [Route("Lista")]
-
-        public async Task<IActionResult> Lista()
-        {
-            var rsp = new Response<List<ClienteDTO>>();
-
-            try
-            {
-                rsp.Status = true;
-                rsp.Value = await _clienteServicio.Lista();
-            }
-
-            catch (Exception ex)
-            {
-                rsp.Msg = ex.Message;
-            }
-            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
-            return Ok(rsp);
-        }
-        [HttpGet]
-        [Route("ListaCliente")]
-
-        public async Task<IActionResult> ListaCliente(int idUsuario)
-        {
-            var rsp = new Response<List<UsuarioDTO>>();
-
-            try
-            {
-                rsp.Status = true;
-                rsp.Value = await _clienteServicio.ListaCliente(idUsuario);
-            }
-
-            catch (Exception ex)
-            {
-                rsp.Msg = ex.Message;
-            }
-            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
-            return Ok(rsp);
-        }
-       
         [HttpPost]
-        [Route("Guardar")]
-
-        public async Task<IActionResult> Guardar([FromBody] ClienteDTO cliente)
+        [Route("Registrar")]
+        public async Task<IActionResult> Registrar([FromBody] ClienteDTO cliente)
         {
             var rsp = new Response<ClienteDTO>();
-
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clienteServicio.Crear(cliente);
+                rsp.Value = await _clienteServicio.Registrar(cliente);
             }
 
             catch (Exception ex)
@@ -80,57 +37,20 @@ namespace SistemaVenta.API.Controllers
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
         }
-        [HttpPut]
-        [Route("Editar")]
-        public async Task<IActionResult> Editar([FromBody] ClienteDTO cliente)
-        {
-            var rsp = new Response<ClienteDTO>();
 
-            try
-            {
-                rsp.Status = true;
-                rsp.Value = await _clienteServicio.Crear(cliente);
-            }
-
-            catch (Exception ex)
-            {
-                rsp.Status = false;
-                rsp.Msg = ex.Message;
-            }
-            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
-            return Ok(rsp);
-        }
-        [HttpDelete]
-        [Route("Eliminar/{id:int}")]
-        public async Task<IActionResult> Eliminar(int id)
-        {
-            var rsp = new Response<bool>();
-
-            try
-            {
-                rsp.Status = true;
-                rsp.Value = await _clienteServicio.Eliminar(id);
-            }
-
-            catch (Exception ex)
-            {
-                rsp.Status = false;
-                rsp.Msg = ex.Message;
-            }
-            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
-            return Ok(rsp);
-        }/*
         [HttpPost]
-        [Route("AgregarCliente")]
-        public async Task<IActionResult> Agregar([FromForm] ClienteDTO cliente)
+        [Route("RegistrarCliente")]
+        public async Task<IActionResult> RegistrarCliente([FromBody] ClienteDTO cliente)
         {
 
+            Console.WriteLine("Ha terminado la tarea");
+            
             var rsp = new Response<ClienteDTO>();
 
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clientes2Servicio.Registrar(cliente);
+                rsp.Value = await _clienteServicio.RegistrarCliente(cliente);
             }
 
             catch (Exception ex)
@@ -138,7 +58,8 @@ namespace SistemaVenta.API.Controllers
                 rsp.Status = false;
                 rsp.Msg = ex.Message;
             }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
-        }*/
+        }
     }
 }

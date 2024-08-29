@@ -43,14 +43,13 @@ namespace SistemaVenta.IOC
             services.AddScoped<IVentaService, VentaService>();
             services.AddScoped<IDashBoardService, DashBoardService>();
             services.AddScoped<IMenuService, MenuService>();
-            services.AddScoped<IClienteService, ClienteService>();
-            services.AddScoped<IClientesService2, ClientesService2>();
             services.AddScoped<IProspectoService, ProspectoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<IFile2Service, File2Service>();
             services.AddScoped<ICotizacionService, CotizacionService>();
             services.AddScoped<IDetalleVentaService, DetalleVentaService>();
+            services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<DbContext, DbhomeEnergyContext>();
 
         }

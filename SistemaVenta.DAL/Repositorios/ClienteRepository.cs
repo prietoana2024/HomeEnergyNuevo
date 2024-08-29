@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SistemaVenta.DAL.DBContext;
 using SistemaVenta.DAL.Repositorios.Contrato;
@@ -21,120 +22,8 @@ namespace SistemaVenta.DAL.Repositorios
         }
         public async Task<Cliente> Registrar(Cliente modelo)
         {
-
-             var cn = new SqlConnection();
-
-                //CREAMOS UNA VARIABLE
-                Cliente clienteGenerado = new();
-
-            Usuario usuario = new Usuario();
-
-            Cliente clienteBuscar = new Cliente();
-
-            //1-TRANSFORMAR EL DTO DE COTIZACION
-
-           /* string connstring = "connection string";
-            using (SqlConnection cn = new SqlConnection(connstring))
-            {
-                cn.Open();
-
-                string query = @"INSERT INTO Cliente (nombre,fachadaimg,url,direccion,contacto,razonSocial,idauditor,detalle,esActivo,fecha,idProspecto)
-                        VALUES(@nombre, @fachadaimg, @url, @direccion, @contacto,@razonSocial,@idauditor,@detalle,@esActivo,@fecha,@idProspecto)";
-
-                SqlCommand cmd = new SqlCommand(query, cn);
-                cmd.Parameters.AddWithValue("@nombre", modelo.Nombre);
-                cmd.Parameters.AddWithValue("@fachadaimg", modelo.Fachadaimg);
-                cmd.Parameters.AddWithValue("@url", modelo.Url);
-                cmd.Parameters.AddWithValue("@direccion", modelo.Direccion);
-                cmd.Parameters.AddWithValue("@contacto", modelo.Nombre);
-                cmd.Parameters.AddWithValue("@razonSocial", modelo.RazonSocial);
-                cmd.Parameters.AddWithValue("@idauditor", modelo.Idauditor);
-                cmd.Parameters.AddWithValue("@detalle", modelo.Detalle);
-                cmd.Parameters.AddWithValue("@esActivo", modelo.EsActivo);
-                cmd.Parameters.AddWithValue("@fecha", modelo.Fecha);
-                cmd.Parameters.AddWithValue("@idProspecto", modelo.IdProspecto);
-
-                cmd.ExecuteNonQuery();
-            }*/
-            //si dentro de la logica ocurre un error la linea siguiente tiene que reestablecer todo al principio
-            using (var transaction = _dbContext.Database.BeginTransaction())
-            {
-                try
-                {
-                   /* foreach (ClienteUsuario dv in modelo.ClienteUsuarios)
-                    {
-                        Usuario usuario_encontrado = _dbContext.Usuarios.Where(p => p.IdUsuario == dv.IdUsuario).First();
-
-                        _dbContext.Usuarios.Update(usuario_encontrado);
-                    }
-                    await _dbContext.SaveChangesAsync();*/
-
-                    //0001
-                    Prospecto prospecto_encontrado = _dbContext.Prospectos.Where(p => p.IdProspecto == modelo.IdProspecto).First();
-                    modelo.IdProspectoNavigation = prospecto_encontrado;
-                     
-                    modelo.FechaRegistro = DateTime.Now;
-
-                    //var LastRegister = _dbContext.Clientes.OrderByDescending(x => x.IdCliente).First().IdCliente;
-
-                    //  var ids = LastRegister+2;
-
-                    //modelo.IdCliente = ids;
-                    foreach (ClienteUsuario dv in modelo.ClienteUsuarios)
-                    {
-
-                        Usuario usuario_encontrado = _dbContext.Usuarios.Where(p => p.IdUsuario == dv.IdUsuario).First();
-
-                        _dbContext.Usuarios.Update(usuario_encontrado);
-                    }
-
-                    await _dbContext.SaveChangesAsync();
-
-                    //  await _dbContext.AddAsync(modelo);
-                    // await _dbContext.SaveChangesAsync();
-
-
-                    //la transaccion puede finalizar sin nigun problema
-                    //  transaction.Commit();
-
-                    //var numeroVenta1 = Convert.ToInt32(numeroVenta);
-                    var idProspecto = Convert.ToInt32(modelo.IdProspecto);
-
-                    modelo.IdProspectoNavigation = prospecto_encontrado;
-                    if(modelo.Idauditor==0)
-                    {
-                        modelo.Idauditor = 1;
-                    }
-
-                    modelo.FechaRegistro = DateTime.Now;
-
-                    modelo.EsActivo=true;
-
-                    
-                    await _dbContext.AddAsync(modelo);
-                    await _dbContext.SaveChangesAsync();
-
-                    // cotizacionGenerada = modelo;
-                    //la transaccion puede finalizar sin nigun problema
-                    
-                    transaction.Commit();
-                }
-                catch
-                {
-                    //devolvera todo como estaba antes
-                    transaction.Rollback();
-                    //devuelve el error
-                    throw;
-                }
-                return modelo;
-            }
-            
-
-        }
-        public async Task<bool> EditarCliente(Cliente modelo)
-        {
             //CREAMOS UNA VARIABLE
-            Cliente clienteGenerada = new();
+            Cliente cotizacionGenerada = new();
 
             Prospecto prospecto = new Prospecto();
 
@@ -146,61 +35,42 @@ namespace SistemaVenta.DAL.Repositorios
             {
                 try
                 {
-
-
-                    var clienteModelo = modelo;
-
-                    var clienteEncontrado = _dbContext.Clientes.Where(p => p.IdCliente == modelo.IdCliente).First();
-
-                    var clientesAnteriores = _dbContext.ClienteUsuarios.Where(p => p.IdCliente == modelo.IdCliente).First();
-
-
-
-                    foreach (ClienteUsuario di in modelo.ClienteUsuarios)
+                    foreach (ClienteUsuario dv in modelo.ClienteUsuarios)
                     {
-                        Usuario usuario_encontrado = _dbContext.Usuarios.Where(p => p.IdUsuario == di.IdUsuario).First();
+                        Usuario servicio_encontrado = _dbContext.Usuarios.Where(p => p.IdUsuario == dv.IdUsuario).First();
 
-                        _dbContext.Usuarios.Update(usuario_encontrado);
+                        _dbContext.Usuarios.Update(servicio_encontrado);
                     }
                     await _dbContext.SaveChangesAsync();
 
-                    //var clienteEncontrado = await _cotizacionRepositorio.Obtener(u => u.IdCotizacion == clienteModelo.IdCotizacion);
+                    Prospecto prospecto_encontrado = _dbContext.Prospectos.Where(p => p.IdProspecto == modelo.IdProspecto).First();
 
-                    if (clienteEncontrado == null)
-                    {
-                        throw new TaskCanceledException("No existe el COTIZACION");
-                    }
-                    clienteEncontrado.Nombre = clienteModelo.Nombre;
-                    clienteEncontrado.EsActivo = clienteModelo.EsActivo;
-                    clienteEncontrado.Fecha = clienteModelo.Fecha;
-                    clienteEncontrado.FechaRegistro = clienteModelo.FechaRegistro;
-                    clienteEncontrado.Fachadaimg = clienteModelo.Fachadaimg;
-                    clienteEncontrado.Url = clienteModelo.Url;
-                    clienteEncontrado.Idauditor = clienteModelo.Idauditor;
-                    clienteEncontrado.RazonSocial = clienteModelo.RazonSocial;
-                    clienteEncontrado.Contacto = clienteModelo.Contacto;
-                    clienteEncontrado.Direccion = clienteModelo.Direccion;
-                    clienteEncontrado.Detalle = clienteModelo.Detalle;
-                    clienteEncontrado.IdProspecto = clienteModelo.IdProspecto;
+                    NumeroDocumento correlativo = _dbContext.NumeroDocumentos.First();
+                    correlativo.UltimoNumero = correlativo.UltimoNumero + 1;
+                    correlativo.FechaRegistro = DateTime.Now;
+                    _dbContext.NumeroDocumentos.Update(correlativo);
+                    await _dbContext.SaveChangesAsync();
+                    //0001
+                    int CantidadDigitos = 4;
+                    string ceros = string.Concat(Enumerable.Repeat("0", CantidadDigitos));
+                    string numeroVenta = ceros + correlativo.UltimoNumero.ToString();
+                    numeroVenta = numeroVenta.Substring(numeroVenta.Length - CantidadDigitos, CantidadDigitos);
 
 
                     //se cayo aqui- probar si fue por l abd esta sola
 
-                    var idProspecto = Convert.ToInt32(modelo.IdProspecto);
 
-                    Prospecto prospecto_encontrado = _dbContext.Prospectos.Where(p => p.IdProspecto == modelo.IdProspecto).First();
+                    var numeroVenta1 = Convert.ToInt32(numeroVenta);
+                    var idProspecto = Convert.ToInt32(modelo.IdProspecto);
 
                     modelo.IdProspectoNavigation = prospecto_encontrado;
 
-                    clienteEncontrado.FechaRegistro = DateTime.Now;
+                    modelo.FechaRegistro = DateTime.Now;
 
-                    _dbContext.Set<Cliente>().Update(clienteEncontrado);
+                    await _dbContext.AddAsync(modelo);
                     await _dbContext.SaveChangesAsync();
 
-                    /*await _dbContext.AddAsync(modelo);
-                    await _dbContext.SaveChangesAsync();
-                    */
-                    clienteGenerada = modelo;
+                    cotizacionGenerada = modelo;
                     //la transaccion puede finalizar sin nigun problema
                     transaction.Commit();
                 }
@@ -211,10 +81,68 @@ namespace SistemaVenta.DAL.Repositorios
                     //devuelve el error
                     throw;
                 }
-                return true;
+                return cotizacionGenerada;
             }
+            //  throw new NotImplementedException();
+
         }
 
-        
+        public async Task<Cliente> RegistrarCliente(Cliente modelo)
+        {
+            Cliente clienteGenerado= new();
+
+            Prospecto prospecto = new Prospecto();
+
+            ClienteUsuario clienteUsuario = new() ;
+
+            clienteGenerado.IdCliente = 0;
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    Prospecto prospecto_encontrado = _dbContext.Prospectos.Where(p => p.IdProspecto == modelo.IdProspecto).First();
+
+                    var idProspecto = Convert.ToInt32(modelo.IdProspecto);
+
+                    modelo.IdProspectoNavigation = prospecto_encontrado;
+
+                    modelo.FechaRegistro = DateTime.Now;
+                    clienteGenerado = modelo;
+                    _dbContext.Clientes.Add(clienteGenerado);
+                    await _dbContext.SaveChangesAsync();
+
+                    clienteUsuario.IdCliente = clienteGenerado.IdCliente;
+                    clienteUsuario.IdClienteNavigation=clienteGenerado;
+
+                    
+
+                    foreach (ClienteUsuario dv in modelo.ClienteUsuarios)
+                    {
+                        Usuario servicio_encontrado = _dbContext.Usuarios.Where(p => p.IdUsuario == dv.IdUsuario).First();
+
+                        _dbContext.Usuarios.Update(servicio_encontrado);
+
+                        clienteUsuario.IdUsuario = servicio_encontrado.IdUsuario;
+                        clienteUsuario.IdUsuarioNavigation = servicio_encontrado;
+                        _dbContext.ClienteUsuarios.Add(clienteUsuario);
+                    }
+                   
+                    await _dbContext.SaveChangesAsync();
+
+                  
+                }
+                catch
+                {
+                    //devolvera todo como estaba antes
+                    transaction.Rollback();
+                    //devuelve el error
+                    throw;
+                }
+                return clienteGenerado;
+            }
+        }
     }
+
+
 }
