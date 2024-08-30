@@ -30,7 +30,6 @@ namespace SistemaVenta.IOC
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IVentaRepository, VentaRepository>();
             services.AddScoped<ICotizacionRepository, CotizacionRepository>();
-            services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -50,6 +49,7 @@ namespace SistemaVenta.IOC
             services.AddScoped<ICotizacionService, CotizacionService>();
             services.AddScoped<IDetalleVentaService, DetalleVentaService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IClienteUsuarioService, ClienteUsuarioService>();
             services.AddScoped<DbContext, DbhomeEnergyContext>();
 
         }

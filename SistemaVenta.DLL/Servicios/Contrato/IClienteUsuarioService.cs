@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SistemaVenta.Models;
 
 namespace SistemaVenta.DLL.Servicios.Contrato
 {
-    public interface IClienteService
+    public interface IClienteUsuarioService
     {
-        Task<List<ClienteDTO>> Lista();
-        Task<ClienteDTO> Crear(ClienteDTO modelo);
-        Task<bool> Editar(ClienteDTO modelo);
+        Task<List<ClienteUsuarioDTO>> Lista();
+        Task<ClienteUsuarioDTO> Crear(ClienteUsuarioDTO modelo);
+        Task<bool> Editar(ClienteUsuarioDTO modelo);
         Task<bool> Eliminar(int id);
     }
 }

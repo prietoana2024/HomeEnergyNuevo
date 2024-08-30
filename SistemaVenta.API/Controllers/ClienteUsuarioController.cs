@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SistemaVenta.API.Utilidad;
 using SistemaVenta.DLL.Servicios.Contrato;
 using SistemaVenta.DTO;
-using SistemaVenta.Models;
-using SistemaVenta.API.Utilidad;
-using AutoMapper;
 
 namespace SistemaVenta.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class ClienteUsuarioController : ControllerBase
     {
-        private readonly IClienteService _clienteServicio;
+        private readonly IClienteUsuarioService _clienteUsuarioServicio;
 
-        public ClienteController(IClienteService clienteServicio)
+        public ClienteUsuarioController(IClienteUsuarioService clienteUsuarioServicio)
         {
-            _clienteServicio = clienteServicio;
+            _clienteUsuarioServicio = clienteUsuarioServicio;
         }
 
         [HttpGet]
@@ -24,12 +22,12 @@ namespace SistemaVenta.API.Controllers
 
         public async Task<IActionResult> Lista()
         {
-            var rsp = new Response<List<ClienteDTO>>();
+            var rsp = new Response<List<ClienteUsuarioDTO>>();
 
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clienteServicio.Lista();
+                rsp.Value = await _clienteUsuarioServicio.Lista();
             }
 
             catch (Exception ex)
@@ -43,14 +41,14 @@ namespace SistemaVenta.API.Controllers
         [Route("Guardar")]
 
 
-        public async Task<IActionResult> Guardar([FromBody] ClienteDTO cliente)
+        public async Task<IActionResult> Guardar([FromBody] ClienteUsuarioDTO clienteUsuario)
         {
-            var rsp = new Response<ClienteDTO>();
+            var rsp = new Response<ClienteUsuarioDTO>();
 
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clienteServicio.Crear(cliente);
+                rsp.Value = await _clienteUsuarioServicio.Crear(clienteUsuario);
             }
 
             catch (Exception ex)
@@ -64,14 +62,14 @@ namespace SistemaVenta.API.Controllers
 
         [HttpPut]
         [Route("Editar")]
-        public async Task<IActionResult> Editar([FromBody] ClienteDTO cliente)
+        public async Task<IActionResult> Editar([FromBody] ClienteUsuarioDTO clienteUsuario)
         {
             var rsp = new Response<bool>();
 
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clienteServicio.Editar(cliente);
+                rsp.Value = await _clienteUsuarioServicio.Editar(clienteUsuario);
             }
 
             catch (Exception ex)
@@ -91,7 +89,7 @@ namespace SistemaVenta.API.Controllers
             try
             {
                 rsp.Status = true;
-                rsp.Value = await _clienteServicio.Eliminar(id);
+                rsp.Value = await _clienteUsuarioServicio.Eliminar(id);
             }
 
             catch (Exception ex)

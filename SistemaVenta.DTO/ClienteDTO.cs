@@ -34,6 +34,6 @@ namespace SistemaVenta.DTO
 
         public string? FechaRegistro { get; set; }
 
-        public virtual ICollection<UsuarioDTO> Usuarios { get; set; }
+        //public virtual ICollection<UsuarioDTO> Usuarios { get; set; }
     }
 }
