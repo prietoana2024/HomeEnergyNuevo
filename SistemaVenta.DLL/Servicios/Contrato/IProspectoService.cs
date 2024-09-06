@@ -15,6 +15,9 @@ namespace SistemaVenta.DLL.Servicios.Contrato
         Task<bool> Editar(ProspectoDTO modelo);
         Task<bool> Eliminar(int id);
 
+        Task<List<ProspectoDTO>> ListaNoConvertidos();
+
+       // Task<bool> Desactivar(int idProspecto);
 
     }
 }

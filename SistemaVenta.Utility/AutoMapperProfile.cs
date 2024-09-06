@@ -171,7 +171,7 @@ namespace SistemaVenta.Utility
                 opt => opt.MapFrom(origen => origen.EsActivo == 1 ? true : false));
 
             #endregion Prospecto
-          
+
             #region Estado
             CreateMap<Estado, EstadoDTO>().ReverseMap();
             #endregion Estado
@@ -248,8 +248,8 @@ namespace SistemaVenta.Utility
             CreateMap<CotizacionDTO, Cotizacion>()
 
 
-           .ForMember(destino=>destino.CotizacionServicios,
-             opt => opt.MapFrom(origen =>origen.Servicios))
+           .ForMember(destino => destino.CotizacionServicios,
+             opt => opt.MapFrom(origen => origen.Servicios))
 
            .ForMember(destino => destino.Total,
            opt => opt.MapFrom(origen => Convert.ToDecimal(origen.TotalTexto, new CultureInfo("es-CO"))))
@@ -295,7 +295,7 @@ namespace SistemaVenta.Utility
                  .ForMember(destino => destino.IdProspecto,
                 opt => opt.MapFrom(origen => origen.IdProspectoNavigation.IdProspecto)
                 );
-                //.ForMember(destino => destino.Usuarios, opt => opt.MapFrom(origen => origen.ClienteUsuarios));
+            //.ForMember(destino => destino.Usuarios, opt => opt.MapFrom(origen => origen.ClienteUsuarios));
 
 
 
@@ -324,36 +324,24 @@ namespace SistemaVenta.Utility
 
             #region ClienteUsuario
 
-              CreateMap<ClienteUsuario, ClienteUsuarioDTO>()
-                 .ForMember(destino => destino.IdUsuario,
-                opt => opt.MapFrom(origen => origen.IdUsuario)
-                )
-                 .ForMember(destino => destino.IdUsuario,
-                opt => opt.MapFrom(origen => origen.IdUsuarioNavigation.IdUsuario)
-                )
-             .ForMember(destino => destino.IdCliente,
-                opt => opt.MapFrom(origen => origen.IdCliente)
-                )
-                 .ForMember(destino => destino.IdCliente,
-                opt => opt.MapFrom(origen => origen.IdClienteNavigation.IdCliente)
-                );
+            CreateMap<ClienteUsuario, ClienteUsuarioDTO>()
+               .ForMember(destino => destino.IdUsuario,
+              opt => opt.MapFrom(origen => origen.IdUsuarioNavigation.IdUsuario)
+              )
+               .ForMember(destino => destino.IdCliente,
+              opt => opt.MapFrom(origen => origen.IdClienteNavigation.IdCliente)
+              );
 
             CreateMap<ClienteUsuarioDTO, ClienteUsuario>()
 
-               .ForMember(destino => destino.IdUsuario,
-                opt => opt.MapFrom(origen => origen.IdUsuario)
-                )
                .ForMember(destino => destino.IdUsuarioNavigation, opt => opt.Ignore()
-                )
-               .ForMember(destino => destino.IdCliente,
-                opt => opt.MapFrom(origen => origen.IdCliente)
                 )
                .ForMember(destino => destino.IdClienteNavigation, opt => opt.Ignore()
                 );
 
 
             #endregion ClienteUsuario
-
+            /*
             CreateMap<ClienteUsuario, UsuarioDTO>()
                 .ForMember(destino =>
                 destino.IdUsuario,
@@ -374,13 +362,13 @@ namespace SistemaVenta.Utility
                 destino.IdCliente,
                 opt => opt.MapFrom(origen => origen.IdCliente));
 
-
+            */
             CreateMap<CotizacionServicio, CotizacionDTO>()
                 .ForMember(destino =>
                 destino.IdCotizacion,
                 opt => opt.MapFrom(origen => origen.IdServicio));
 
-            CreateMap< CotizacionDTO, CotizacionServicio>()
+            CreateMap<CotizacionDTO, CotizacionServicio>()
                 .ForMember(destino =>
                 destino.IdCotizacion,
                 opt => opt.MapFrom(origen => origen.IdCotizacion));
@@ -394,7 +382,52 @@ namespace SistemaVenta.Utility
                 .ForMember(destino =>
                 destino.IdCotizacion,
                 opt => opt.MapFrom(origen => origen.IdServicio));
-      
+
+            #region ClienteUsuarioIner
+            CreateMap<ClienteUsuario, ClienteUsuarioInerDTO>()
+                .ForMember(destino => destino.DescripcionUsuario,
+                opt => opt.MapFrom(origen => origen.IdUsuarioNavigation.NombreCompleto)
+                )
+                .ForMember(destino => destino.DescripcionCliente,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Nombre)
+                );
+            CreateMap<ClienteUsuarioInerDTO, ClienteUsuario>()
+                .ForMember(destino => destino.IdClienteNavigation,
+                opt => opt.Ignore()
+                )
+                .ForMember(destino => destino.IdUsuarioNavigation,
+                opt => opt.Ignore()
+                );
+
+            #endregion ClienteUsuarioIner
+
+            #region Reporte
+            CreateMap<ClienteUsuario, ClienteAsignadoDTO>()
+                .ForMember(destino => destino.IdCliente,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.IdCliente))
+
+                 .ForMember(destino => destino.DescripcionCliente,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Nombre))
+
+
+               .ForMember(destino => destino.Contacto,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Contacto))
+
+
+                  .ForMember(destino => destino.FechaRegistro,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.FechaRegistro.Value.ToString("dd/MM/yyyy")))
+
+                 .ForMember(destino => destino.Fecha,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Fecha.Value.ToString("dd/MM/yyyy")))
+
+               .ForMember(destino => destino.Idauditor,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Idauditor))
+
+                .ForMember(destino =>
+                destino.Usuario,
+                opt => opt.MapFrom(origen => Convert.ToString(origen.IdUsuarioNavigation.NombreCompleto)));
+
+            #endregion
         }
 
     }

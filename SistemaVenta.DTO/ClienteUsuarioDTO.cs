@@ -10,8 +10,8 @@ namespace SistemaVenta.DTO
     {
         public int IdClienteUsuario { get; set; }
 
-        public int? IdCliente { get; set; }
+        public int IdCliente { get; set; }
 
-        public int? IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
     }
 }

@@ -40,6 +40,81 @@ namespace SistemaVenta.DLL.Servicios
                 throw;
             }
         }
+        public async Task<List<ProspectoDTO>> ListaNoConvertidos()
+        {
+            /*  IQueryable<Cliente> tbCliente = await _clienteRepositorio.Consultar(u => u.IdProspecto == idUsuario);
+              IQueryable<MenuRol> tbMenuRol = await _menuRolRepositorio.Consultar();
+              try
+              {
+                  var queryProducto = await _prospectoRepositorio.Consultar();
+                  return _mapper.Map<List<ProspectoDTO>>(queryProducto).ToList();
+              }
+              catch
+              {
+                  throw;
+              }*/
+            IQueryable<Cliente> tbCliente = await _clienteRepositorio.Consultar();
+            IQueryable<Prospecto> tbProspecto = await _prospectoRepositorio.Consultar();
+
+            var lista=new List<Prospecto>();
+            /*
+             foreach (var sucursal in lstSucursal)
+            {
+                foreach (var central in lstCentral)
+                {
+                    if (sucursal.codigo != central.codigo )
+                    {
+                        if (sucursal.presinto != central.presinto )
+                        {
+                            lstInsert.Add(sucursal);
+                        }
+                    }
+                   break;
+                }
+            }*/
+            try
+            {
+                /*var lstInsert = from a in lstSucursal
+                from b in lstCentral
+                where a.codigo != b.codigo && a.presinto != b.presinto
+                select a;*/
+                /* IQueryable<Prospecto> tbResultado = (from a in tbProspecto
+                                 from b in tbCliente
+                                 where a.IdProspecto != b.IdProspecto
+                                 select a).AsQueryable();*/
+               /* var lstInsert = from a in tbProspecto
+                                join b in tbCliente on a.Nombre equals b.Nombre
+                                select a;
+
+                foreach (Prospecto dv in tbProspecto)
+                {
+                    var milista = lstInsert.Where(p => p.IdProspecto != dv.IdProspecto).First();
+
+                    lista.Add(milista);
+                }*/
+               /* foreach (var item in tbProspecto)
+                {
+
+                    foreach (var item2 in lstInsert)
+                    {
+                        if (item.IdProspecto != item2.IdProspecto)
+                        {
+                            lista.Add(item);
+                        }
+                   
+                }}*/
+                var listaProspectos = lista.ToList();
+                return _mapper.Map<List<ProspectoDTO>>(listaProspectos);
+            }
+            catch
+            {
+                throw;
+            }
+
+
+        }
+
+
         public async Task<ProspectoDTO> Crear(ProspectoDTO modelo)
         {
             try
@@ -95,6 +170,35 @@ namespace SistemaVenta.DLL.Servicios
                 throw;
             }
         }
+        /* 
+        public async Task<bool> Desactivar(int idProspecto)
+        {
+
+
+            try
+            {
+                var prospectoEncontrado = await _prospectoRepositorio.Obtener(u => u.IdProspecto == idProspecto);
+                if (prospectoEncontrado == null)
+                {
+                    throw new TaskCanceledException("Prospecto no existe");
+                }
+
+                prospectoEncontrado.EsActivo = false;
+
+
+                bool respuesta = await _prospectoRepositorio.Editar(prospectoEncontrado);
+
+                if (respuesta == false)
+                {
+                    throw new TaskCanceledException("No se pudo desactivar");
+                }
+                return respuesta;
+            }
+            catch
+            {
+                throw;
+            }
+        }*/
 
         public async Task<bool> Eliminar(int id)
         {

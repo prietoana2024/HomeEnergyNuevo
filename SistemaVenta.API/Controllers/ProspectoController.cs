@@ -40,6 +40,26 @@ namespace SistemaVenta.API.Controllers
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
         }
+        [HttpGet]
+        [Route("ListaNoConvertidos")]
+
+        public async Task<IActionResult> ListaNoConvertidos()
+        {
+            var rsp = new Response<List<ProspectoDTO>>();
+
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _prospectoServicio.ListaNoConvertidos();
+            }
+
+            catch (Exception ex)
+            {
+                rsp.Msg = ex.Message;
+            }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
+            return Ok(rsp);
+        }
         [HttpPost]
         [Route("Guardar")]
 

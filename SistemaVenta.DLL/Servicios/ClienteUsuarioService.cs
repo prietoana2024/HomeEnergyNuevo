@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto;
 using SistemaVenta.DAL.Repositorios.Contrato;
 using SistemaVenta.DLL.Servicios.Contrato;
@@ -6,6 +7,7 @@ using SistemaVenta.DTO;
 using SistemaVenta.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,8 +34,30 @@ namespace SistemaVenta.DLL.Servicios
             _mapper = mapper;
         }
 
-        public async Task<List<ClienteUsuarioDTO>> Lista()
+        public async Task<List<ClienteDTO>> Lista(int idUsuario)
         {
+            
+           /* IQueryable<MenuRol> tbMenuRol = await _menuRolRepositorio.Consultar();
+            IQueryable<Usuario> tbUsuario = await _usuarioRepositorio.Consultar();
+            IQueryable<Menu> tbMenu = await _menuRepositorio.Consultar();*/
+
+           /* IQueryable<ClienteUsuario> tbClienteUsuario = await _clienteUsuarioRepositorio.Consultar();
+            IQueryable<Usuario> tbUsuario = await _usuarioRepositorio.Consultar();*/
+            IQueryable<Cliente> query = await _clienteRepositorio.Consultar(u => u.Idauditor == idUsuario);
+
+            try
+            {
+                var listaClientes = query.ToList();
+                return _mapper.Map<List<ClienteDTO>>(listaClientes);
+
+
+                
+            }
+            catch
+            {
+                throw;
+            }/*
+
             try
             {
                 var queryclienteUsuarioCreado = await _clienteUsuarioRepositorio.Consultar();
@@ -42,9 +66,91 @@ namespace SistemaVenta.DLL.Servicios
             catch
             {
                 throw;
-            }
-        }
+            }*/
+        }/*
+        public async  Task<List<ClientesXUsuarioDTO>> ListaConUsuarios()
+        {
+            IQueryable<ClienteUsuario> tbClienteUsuario = await _clienteUsuarioRepositorio.Consultar();
+            IQueryable<Usuario> tbUsuario = await _usuarioRepositorio.Consultar();
+            IQueryable<Cliente> tbCliente = await _clienteRepositorio.Consultar();
 
+
+            ClientesXUsuarioDTO clienteData = new();
+            try
+            {
+                IQueryable tbResultado = (from u in tbCliente
+                                                   join mr in tbClienteUsuario on u.IdCliente equals mr.IdCliente
+                                                   join m in tbUsuario on mr.IdUsuario equals  m.IdUsuario
+                                          select u).AsQueryable();
+
+                IQueryable tbResultado2= (from u in tbUsuario
+                                          join mr in tbClienteUsuario on u.IdUsuario equals mr.IdUsuario
+                                          join m in tbCliente on mr.IdCliente equals m.IdCliente
+                                          select u).AsQueryable();
+
+                var listaClientes = tbResultado;
+
+
+                return _mapper.Map<List<ClientesXUsuarioDTO>>(listaClientes);
+
+
+            }
+            catch
+            {
+                throw;
+            }
+        }*/
+
+
+        public async Task<List<ClienteAsignadoDTO>> UsuariosXClientesListaNombre(string nombreUsuario)
+        {
+            IQueryable<ClienteUsuario> query = await _clienteUsuarioRepositorio.Consultar();
+            /*  IQueryable<Usuario> tbUsuario = await _usuarioRepositorio.Consultar();
+              IQueryable<Cliente> tbCliente = await _clienteRepositorio.Consultar();*/
+            // IQueryable<DetalleVenta> query = await _detalleVentaRepositorio.Consultar();
+            //ESE RETORNA UNA LISTA DEL TIPO DETALLE VENTA
+            var listaResultado = new List<ClienteUsuario>();
+
+            var listaFInal = new List<ClienteUsuario>();
+            try
+            {
+                listaResultado = await query.Include(p => p.IdUsuarioNavigation).Include(v => v.IdClienteNavigation).ToListAsync();
+
+                foreach (ClienteUsuario dv in listaResultado)
+                {
+                    ClienteUsuario cliente_encontrado = listaResultado.Where(p => p.IdUsuarioNavigation.NombreCompleto == nombreUsuario).First();
+                     if(dv.IdUsuarioNavigation.NombreCompleto== nombreUsuario)
+                    {
+                        listaFInal.Add(cliente_encontrado);
+                    }
+                    
+                }
+                   
+            }
+            catch
+            {
+                throw;
+            }
+            return _mapper.Map<List<ClienteAsignadoDTO>>(listaFInal);
+        }
+        public async Task<List<ClienteAsignadoDTO>> UsuariosXClientesLista()
+        {
+            IQueryable<ClienteUsuario> query = await _clienteUsuarioRepositorio.Consultar();
+          /*  IQueryable<Usuario> tbUsuario = await _usuarioRepositorio.Consultar();
+            IQueryable<Cliente> tbCliente = await _clienteRepositorio.Consultar();*/
+           // IQueryable<DetalleVenta> query = await _detalleVentaRepositorio.Consultar();
+            //ESE RETORNA UNA LISTA DEL TIPO DETALLE VENTA
+            var listaResultado = new List<ClienteUsuario>();
+            try
+            {
+                listaResultado = await query.Include(p => p.IdUsuarioNavigation).Include(v => v.IdClienteNavigation).ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
+            return _mapper.Map<List<ClienteAsignadoDTO>>(listaResultado);
+        }
         public async  Task<ClienteUsuarioDTO> Crear(ClienteUsuarioDTO modelo)
         {
             try
@@ -138,6 +244,6 @@ namespace SistemaVenta.DLL.Servicios
             }
         }
 
-       
+        
     }
 }

@@ -47,6 +47,8 @@ namespace SistemaVenta.API.Controllers
         {
             var rsp = new Response<ClienteDTO>();
 
+            
+
             try
             {
                 rsp.Status = true;
