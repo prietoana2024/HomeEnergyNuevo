@@ -92,7 +92,7 @@ namespace SistemaVenta.DLL.Servicios
 
                     lista.Add(milista);
                 }*/
-               /* foreach (var item in tbProspecto)
+               /*foreach (var item in tbProspecto)
                 {
 
                     foreach (var item2 in lstInsert)

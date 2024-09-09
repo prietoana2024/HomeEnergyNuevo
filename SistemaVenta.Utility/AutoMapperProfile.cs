@@ -423,6 +423,14 @@ namespace SistemaVenta.Utility
                .ForMember(destino => destino.Idauditor,
                 opt => opt.MapFrom(origen => origen.IdClienteNavigation.Idauditor))
 
+                .ForMember(destino => destino.Fachadaimg,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Fachadaimg))
+
+
+                .ForMember(destino => destino.Url,
+                opt => opt.MapFrom(origen => origen.IdClienteNavigation.Url))
+
+
                 .ForMember(destino =>
                 destino.Usuario,
                 opt => opt.MapFrom(origen => Convert.ToString(origen.IdUsuarioNavigation.NombreCompleto)));

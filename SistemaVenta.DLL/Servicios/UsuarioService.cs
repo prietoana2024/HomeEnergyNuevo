@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace SistemaVenta.DLL.Servicios
 {
-    public class UsuarioService:IUsuarioService
+    public class UsuarioService : IUsuarioService
     {
 
-       
+
         private readonly IGenericRepository<ClienteUsuario> _clienteUsuarioRepositorio;
         private readonly IGenericRepository<Cliente> _clienteRepositorio;
         private readonly IGenericRepository<Prospecto> _prospectoRepositorio;
@@ -38,6 +38,19 @@ namespace SistemaVenta.DLL.Servicios
                 var queryUsuario = await _usuarioRepositorio.Consultar();
                 var listaUsuarios = queryUsuario.Include(rol => rol.IdRolNavigation).ToList();
                 return _mapper.Map<List<UsuarioDTO>>(listaUsuarios);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<UsuarioDTO>> ListaNombres()
+        {
+            try
+            {
+                var queryUsuario = await _usuarioRepositorio.Consultar();
+                return _mapper.Map<List<UsuarioDTO>>(queryUsuario);
             }
             catch
             {
@@ -92,8 +105,8 @@ namespace SistemaVenta.DLL.Servicios
             {
                 var usuarioModelo = _mapper.Map<Usuario>(modelo);
                 var usuarioEncontrado = await _usuarioRepositorio.Obtener(u => u.IdUsuario == usuarioModelo.IdUsuario);
-                
-                if(usuarioEncontrado == null)
+
+                if (usuarioEncontrado == null)
                 {
                     throw new TaskCanceledException("Usuario no existe");
                 }
@@ -159,7 +172,7 @@ namespace SistemaVenta.DLL.Servicios
 
                 bool respuesta = await _usuarioRepositorio.Editar(usuarioEncontrado);
 
-                
+
 
                 if (respuesta == false)
                 {

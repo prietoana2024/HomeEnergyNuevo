@@ -153,28 +153,41 @@ namespace SistemaVenta.DLL.Servicios
         }
         public async  Task<ClienteUsuarioDTO> Crear(ClienteUsuarioDTO modelo)
         {
+
             try
             {
-                var clienteEncontrado = await _clienteRepositorio.Obtener(u => u.IdCliente == modelo.IdCliente);
+                var relacionEncontrado = await _clienteUsuarioRepositorio.Obtener(u => u.IdCliente == modelo.IdCliente && u.IdUsuario == modelo.IdUsuario);
 
-
-                var usuarioEncontrado = await _usuarioRepositorio.Obtener(u => u.IdUsuario == modelo.IdUsuario);
-
-                //EN EL FRONT DEBE RECORRER UN ARREGLO Y CADA VEZ QUE VENGA, ENTRARÁ ACÁ
-
-                ClienteUsuario modeloConvertido = new();
-
-                modeloConvertido = _mapper.Map<ClienteUsuario>(modelo);
-
-                modeloConvertido.IdClienteNavigation = clienteEncontrado;
-                modeloConvertido.IdUsuarioNavigation = usuarioEncontrado;
-
-                var clienteUsuarioCreado = await _clienteUsuarioRepositorio.Crear(modeloConvertido);
-                if (clienteUsuarioCreado.IdClienteUsuario == 0)
+                if (relacionEncontrado == null)
                 {
-                    throw new TaskCanceledException("No se pudo crear el cliente");
+                    var clienteEncontrado = await _clienteRepositorio.Obtener(u => u.IdCliente == modelo.IdCliente);
+
+
+                    var usuarioEncontrado = await _usuarioRepositorio.Obtener(u => u.IdUsuario == modelo.IdUsuario);
+
+
+
+                    //EN EL FRONT DEBE RECORRER UN ARREGLO Y CADA VEZ QUE VENGA, ENTRARÁ ACÁ
+
+                    ClienteUsuario modeloConvertido = new();
+
+                    modeloConvertido = _mapper.Map<ClienteUsuario>(modelo);
+
+                    modeloConvertido.IdClienteNavigation = clienteEncontrado;
+                    modeloConvertido.IdUsuarioNavigation = usuarioEncontrado;
+
+                    var clienteUsuarioCreado = await _clienteUsuarioRepositorio.Crear(modeloConvertido);
+                    if (clienteUsuarioCreado.IdClienteUsuario == 0)
+                    {
+                        throw new TaskCanceledException("No se pudo crear el cliente");
+                    }
+                    return _mapper.Map<ClienteUsuarioDTO>(clienteUsuarioCreado);
                 }
-                return _mapper.Map<ClienteUsuarioDTO>(clienteUsuarioCreado);
+                else
+                {
+                    throw new TaskCanceledException("El cliente ya fue asignado a ese usuario");
+                }
+                
 
             }
             catch

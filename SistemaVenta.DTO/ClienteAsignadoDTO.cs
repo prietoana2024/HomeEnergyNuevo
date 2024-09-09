@@ -12,6 +12,10 @@ namespace SistemaVenta.DTO
 
         public string? DescripcionCliente { get; set; }
 
+        public string? Fachadaimg { get; set; }
+
+        public string? Url { get; set; }
+
         public int? IdUsuario { get; set; }
         public string? Contacto { get; set; }
 

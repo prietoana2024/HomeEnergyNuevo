@@ -10,6 +10,8 @@ namespace SistemaVenta.DLL.Servicios.Contrato
     public interface IUsuarioService
     {
         Task<List<UsuarioDTO>> Lista();
+
+        Task<List<UsuarioDTO>> ListaNombres();
         Task<SesionDTO> ValidarCredenciales(string Correo, string Clave);
         Task<UsuarioDTO> Crear(UsuarioDTO modelo);
         Task<bool> Editar(UsuarioDTO modelo);

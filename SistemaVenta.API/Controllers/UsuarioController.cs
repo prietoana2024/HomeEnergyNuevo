@@ -37,6 +37,26 @@ namespace SistemaVenta.API.Controllers
             //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
             return Ok(rsp);
         }
+        [HttpGet]
+        [Route("ListaNombres")]
+
+        public async Task<IActionResult> ListaNombres()
+        {
+            var rsp = new Response<List<UsuarioDTO>>();
+
+            try
+            {
+                rsp.Status = true;
+                rsp.Value = await _usuarioServicio.ListaNombres();
+            }
+
+            catch (Exception ex)
+            {
+                rsp.Msg = ex.Message;
+            }
+            //TODAS LOS SOLICITUDES SERÁN RESPUESTAS EXITOSAS
+            return Ok(rsp);
+        }
         [HttpPost]
         [Route("IniciarSesion")]
 
