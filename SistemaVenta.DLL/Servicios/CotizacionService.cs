@@ -40,6 +40,14 @@ namespace SistemaVenta.DLL.Servicios
 
         public async Task<CotizacionDTO> Registrar(CotizacionDTO modelo)
         {
+
+            var FechaRegistro = DateTime.Now;
+          
+            if (modelo.FechaRegistro == null)
+            {
+                modelo.FechaRegistro = FechaRegistro.ToString("dd/MM/yyyy");
+            }
+            
             try
             {
                 var cotizacionGenerada = await _cotizacionRepository.Registrar(_mapper.Map<Cotizacion>(modelo));

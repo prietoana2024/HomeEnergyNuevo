@@ -58,8 +58,6 @@ namespace SistemaVenta.DAL.Repositorios
 
 
                     //se cayo aqui- probar si fue por l abd esta sola
-
-
                     var numeroVenta1 = Convert.ToInt32(numeroVenta);
                     var idProspecto = Convert.ToInt32(modelo.IdProspecto);
 
@@ -71,6 +69,7 @@ namespace SistemaVenta.DAL.Repositorios
                     await _dbContext.SaveChangesAsync();
 
                     cotizacionGenerada = modelo;
+
                     //la transaccion puede finalizar sin nigun problema
                     transaction.Commit();
                 }
